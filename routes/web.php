@@ -5,15 +5,28 @@ use Symfony\Component\Routing\RouteCollection;
 
 // Routes system
 $routes = new RouteCollection();
-$routes->add('homepage',
+$routes->add('login',
     new Route(
-        constant('URL_SUBFOLDER').'/',
-        ['controller' => 'PageController', 'method' => 'indexAction'],
-        []
+        '/login',
+        ['controller' => 'LoginController', 'method' => 'showForm'],
+        methods: 'GET'
+    ));
+$routes->add('home',
+    new Route(
+        '/home',
+        ['controller' => 'HomeController', 'method' => 'index'],
+        methods: 'GET'
     ));
 $routes->add('product',
     new Route(
-        constant('URL_SUBFOLDER').'/product/{id}',
+        '/product/{id}',
         ['controller' => 'ProductController', 'method' => 'showAction'],
         ['id' => '[0-9]+']
     ));
+$routes->add('try-login',
+    new Route(
+        '/try-login',
+        ['controller' => 'LoginController', 'method' => 'login'],
+        methods: 'POST'
+    ));
+

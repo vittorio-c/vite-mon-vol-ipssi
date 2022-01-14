@@ -47,11 +47,7 @@ class Session
 
     public function &__get($name)
     {
-        if (isset($_SESSION[$name])) {
-            return $_SESSION[$name];
-        }
-
-        return $name;
+        return $_SESSION[$name];
     }
 
     public function __isset($name)

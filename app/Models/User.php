@@ -50,4 +50,27 @@ class User
     {
         return $this->data;
     }
+
+    public function login($email, $password)
+    {
+        $results = $this->db->run('SELECT * FROM users WHERE email = ? AND password = ?', [$email, $password])
+            ->fetch();
+
+        return $this->setData($results);
+    }
+
+    public function isLoggedIn()
+    {
+        // optionnel : get la variable de session
+    }
+
+    public function isAdmin()
+    {
+
+    }
+
+    public function getCircuits($userId)
+    {
+
+    }
 }

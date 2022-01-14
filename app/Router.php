@@ -19,7 +19,7 @@ class Router
         // Routing can match routes with incoming requests
         $matcher = new UrlMatcher($routes, $context);
         try {
-            $matcher = $matcher->match($_SERVER['REQUEST_URI']);
+            $matcher = $matcher->match($_SERVER['PATH_INFO']);
 
             // Cast params to int if numeric
             array_walk($matcher, function (&$param) {
@@ -33,8 +33,14 @@ class Router
             $className = '\\App\\Controllers\\'.$matcher['controller'];
             $classInstance = new $className();
 
-            // Add routes as paramaters to the next class
-            $params = array_merge((array) array_slice($matcher, 2, -1), ['routes' => $routes]);
+            $params = ['post' => [], 'get' => []];
+            if (!empty($_POST)) {
+                $params['post'] = $_POST;
+            }
+
+            if (!empty($_GET)) {
+                $params['get'] = $_GET;
+            }
 
             call_user_func_array([$classInstance, $matcher['method']], $params);
         } catch (MethodNotAllowedException $e) {
@@ -47,4 +53,6 @@ class Router
 
 // Invoke
 $router = new Router();
-$router($routes);
+if (!empty($routes)) {
+    $router($routes);
+}
