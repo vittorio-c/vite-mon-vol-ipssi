@@ -1,5 +1,4 @@
 <?php
-//session_start(['cookie_lifetime' => 86400]);
 use App\Services\Session;
 $session = Session::getInstance();
 ?>
@@ -15,7 +14,37 @@ $session = Session::getInstance();
 </head>
 
 <body>
-    <h1>Home</h1>
+    <section>
+        <p>
+            Connecté en tant que : <?= $session->loggedInUser->username ?>
+        </p>
+        <p><a href="/logout">Déconnectez-moi</a></p>
+    </section>
+    <section>
+        <h1>Nos circuits</h1>
+        <?php foreach ($tours as $tour): ?>
+            <article>
+                <h2>
+                    <strong><?= $tour->name ?></strong>
+                </h2>
+                <p><?= $tour->description ?></p>
+                <p>
+                    Départ depuis: <?= $tour->destinations->departure ?><br>
+                    Arrivée à : <?= $tour->destinations->arrival ?>
+                </p>
+                <p>
+                    Etapes :
+                <ul>
+                    <?php foreach ($tour->destinations->halts as $halt): ?>
+                        <li><?= $halt ?></li>
+                    <?php endforeach; ?>
+                </ul>
+                </p>
+            </article>
+
+        <?php endforeach; ?>
+    </section>
+
 </body>
 
 </html>

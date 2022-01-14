@@ -8,7 +8,7 @@ $routes = new RouteCollection();
 $routes->add('login',
     new Route(
         '/login',
-        ['controller' => 'LoginController', 'method' => 'showForm'],
+        ['controller' => 'LoginController', 'method' => 'showLoginForm'],
         methods: 'GET'
     ));
 $routes->add('home',
@@ -29,4 +29,21 @@ $routes->add('try-login',
         ['controller' => 'LoginController', 'method' => 'login'],
         methods: 'POST'
     ));
-
+$routes->add('subscribe',
+    new Route(
+        '/subscribe',
+        ['controller' => 'LoginController', 'method' => 'showSubscribeForm'],
+        methods: 'GET'
+    ));
+$routes->add('try-subscribe',
+    new Route(
+        '/try-subscribe',
+        ['controller' => 'LoginController', 'method' => 'subscribe'],
+        methods: 'POST'
+    ));
+$routes->add('logout',
+    new Route(
+        '/logout',
+        ['controller' => 'LoginController', 'method' => 'logout'],
+        methods: 'GET'
+    ));

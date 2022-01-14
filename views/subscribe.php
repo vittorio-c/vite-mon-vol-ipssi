@@ -15,21 +15,24 @@ $session = Session::getInstance();
 </head>
 
 <body>
-    <h1>Login</h1>
-    <form action="/try-login"  method="post">
+    <h1>Inscription</h1>
+    <form action="/try-subscribe"  method="post">
         <label>
             Email
             <input type="email" name="email">
         </label>
         <label>
+            Nom
+            <input type="text" name="username">
+        </label>
+        <label>
             Mot de passe
             <input type="password" name="password">
         </label>
-        <button type="submit">Connectez-moi</button>
+        <button type="submit">Inscription</button>
     </form>
-    <?php if (!empty($session->loginError)) echo '<p>'.$session->loginError.'</p>'; ?>
-
-    <p>Pas encore de compte ? <a href="/subscribe">Inscrivez-vous !</a></p>
+    <?php if (!empty($session->subscribeError)) echo '<p>'.$session->subscribeError.'</p>'; ?>
+    <p>Déjà un compte ? <a href="/login">Connectez-vous !</a></p>
 </body>
 
 </html>

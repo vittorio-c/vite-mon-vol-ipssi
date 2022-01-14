@@ -30,9 +30,12 @@ class User
         return $this->setData($results);
     }
 
-    public function create()
+    public function create(array $payload)
     {
-        // Create user
+        return $this->db->run('
+            INSERT INTO users(username, email, password) 
+            VALUES (?, ?, ?)', [$payload['username'], $payload['email'], $payload['password']]
+        );
     }
 
     public function update(array $data)
